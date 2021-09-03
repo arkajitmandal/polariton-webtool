@@ -1,7 +1,21 @@
 
 var myChart1, myChart2
+var X, Xmin, Xmax, XN
+
+Xmin = -1.5
+Xmax =  1.5
+XN   = 50 + 2
+dX   = (Xmax - Xmin)/(XN-2 + 1)
+X = Array(XN)
+for (var i=0;i<XN;i++){
+    X[i] = Xmin + dX * i
+}
+
+
+
+
 var plot = function(){
-    var X =  [-1.5, -1.25, -1.0, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5]
+    //var X =  [-1.5, -1.25, -1.0, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5]
     var Y1 = Eg(X)
     var Y2 = Ee(X)
     var Y3 = Eg1(X)  
@@ -36,7 +50,7 @@ var plot = function(){
                 pointBorderWidth: 10,
                 pointHoverRadius: 10,
                 pointHoverBorderWidth: 1,
-                pointRadius: 2,
+                pointRadius: 0,
                 fill: false,
                 borderWidth: 4,
                 data: Y1
@@ -51,7 +65,7 @@ var plot = function(){
                 pointBorderWidth: 10,
                 pointHoverRadius: 10,
                 pointHoverBorderWidth: 1,
-                pointRadius: 2,
+                pointRadius: 0,
                 fill: false,
                 borderWidth: 4,
                 data: Y2
@@ -66,7 +80,7 @@ var plot = function(){
                 pointBorderWidth: 10,
                 pointHoverRadius: 10,
                 pointHoverBorderWidth: 1,
-                pointRadius: 2,
+                pointRadius: 0,
                 fill: false,
                 borderWidth: 4,
                 data: Y3
@@ -111,9 +125,9 @@ var plot = function(){
 }
 
 var plot2 = function(){
-    var X =  [-1.5, -1.25, -1.0, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5]
+    //var X =  [-1.5, -1.25, -1.0, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5]
     var Y1 = Eg(X)
-    var Y2 = Ee(X)
+    var Y2 = Ep1(X)
     var Y3 = Eg1(X)  
     //[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
@@ -146,7 +160,7 @@ var plot2 = function(){
                 pointBorderWidth: 10,
                 pointHoverRadius: 10,
                 pointHoverBorderWidth: 1,
-                pointRadius: 2,
+                pointRadius: 0,
                 fill: false,
                 borderWidth: 4,
                 data: Y1
@@ -161,7 +175,7 @@ var plot2 = function(){
                 pointBorderWidth: 10,
                 pointHoverRadius: 10,
                 pointHoverBorderWidth: 1,
-                pointRadius: 2,
+                pointRadius: 0,
                 fill: false,
                 borderWidth: 4,
                 data: Y2
@@ -176,7 +190,7 @@ var plot2 = function(){
                 pointBorderWidth: 10,
                 pointHoverRadius: 10,
                 pointHoverBorderWidth: 1,
-                pointRadius: 2,
+                pointRadius: 0,
                 fill: false,
                 borderWidth: 4,
                 data: Y3
@@ -266,14 +280,45 @@ var Ee = function(R){
     return E 
 }
 
+// Excited State
+var Ep1 = function(R){
+    var N = R.length
+    var E = Array(N)
+    var E0 = Ee(R)
+    var G1 = Eg1(R)
+    var d = document.getElementById("g").value/100 * 0.3
+    for (var i=0;i<N;i++){
+        E[i] =  (0.5 * (E0[i] + G1[i]) + (d**2.0 + 0.25 * (G1[i]-E0[i])**2.0 )**0.5 )  
+    } 
+    return E 
+}
+
+var Ep2 = function(R){
+    var N = R.length
+    var E = Array(N)
+    var E0 = Ee(R)
+    var G1 = Eg1(R)
+    var d = document.getElementById("g").value/100 * 0.3
+    for (var i=0;i<N;i++){
+        E[i] =  (0.5 * (E0[i] + G1[i]) - (d**2.0 + 0.25 * (G1[i]-E0[i])**2.0 )**0.5 )  
+    } 
+    return E 
+}
+
  
-function update(chart) {
-    var X =  [-1.5, -1.25, -1.0, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5]
+function update() {
+     
     var Y1 = Eg(X)
     var Y2 = Ee(X)
     var Y3 = Eg1(X)
-    chart.data.datasets[0].data =  Y1
-    chart.data.datasets[1].data =  Y2
-    chart.data.datasets[2].data =  Y3
-    chart.update('none');
+    myChart1.data.datasets[0].data =  Y1
+    myChart1.data.datasets[1].data =  Y2
+    myChart1.data.datasets[2].data =  Y3
+    myChart1.update('none');
+    var Y4 = Ep1(X)
+    var Y5 = Ep2(X)
+    myChart2.data.datasets[1].data =  Y5
+    myChart2.data.datasets[2].data =  Y4
+    myChart2.update('none');
+
 }
