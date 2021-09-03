@@ -5,25 +5,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
 </head>
-<body>
+<body onload="plot();plot2()">
     <div class="container">
         <div class="omega">
-            <input type="range" id="omega" name="omega" min="0" max="100" style='width: 80%;' onchange="plot()">
+            <input type="range" id="omega" name="omega" min="0" max="100" style='width: 80%;' onchange="update(myChart1)">
             <label for="omega">&omega;<sub>c</sub></label>
         </div>
         <div class="gc">
-            <input type="range" id="g" name="g" min="0" max="100" style='width: 80%;' onchange="plot()">
+            <input type="range" id="g" name="g" min="0" max="100" style='width: 80%;' onchange="update(myChart1)">
             <label for="g">g<sub>c</sub></label>
         </div>
         <div class="Cavity">
-            <canvas id="cavityCanvas" width="100%" height="100%"></canvas>
-        </div>
-        <div class="PES">'
             <canvas id="myChart" width="100%" height="100%"></canvas>
         </div>
+        <div class="PES">
+            <canvas id="myChart2" width="100%" height="100%"></canvas>
+        </div>
       </div>
-      <script>
-          plot()
-      </script>
+
 </body>
 </html>

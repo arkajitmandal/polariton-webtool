@@ -9,11 +9,17 @@
 }
 .omega { grid-area: omega; padding-left: 10%; }
 .gc { grid-area: gc; padding-left: 10%;}
-.Cavity { grid-area: Cavity; }
+.Cavity { grid-area: Cavity;padding-left: 10%;padding-right: 10%;}
 .PES { grid-area: PES; padding-left: 10%;padding-right: 10%;}
 
 
 html, body , .container {
   height: 100%;
   margin: 0;
+}
+canvas{
+
+  width:100% !important;
+  height:100% !important;
+
 }
