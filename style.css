@@ -1,0 +1,19 @@
+.container {
+  display: grid; 
+  grid-template-columns: 1.3fr 1.2fr; 
+  grid-template-rows: 0.4fr 1.3fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "omega gc"
+    "Cavity PES"; 
+}
+.omega { grid-area: omega; }
+.gc { grid-area: gc; }
+.Cavity { grid-area: Cavity; }
+.PES { grid-area: PES; }
+
+
+html, body , .container {
+  height: 100%;
+  margin: 0;
+}
