@@ -12,7 +12,7 @@
             <label for="omega">&omega;<sub>c</sub></label>
         </div>
         <div class="gc">
-            <input type="range" id="g" name="g" min="0" max="100" style='width: 80%;'>
+            <input type="range" id="g" name="g" min="0" max="100" style='width: 80%;' onchange="plot()">
             <label for="g">g<sub>c</sub></label>
         </div>
         <div class="Cavity">
@@ -22,5 +22,8 @@
             <canvas id="myChart" width="100%" height="100%"></canvas>
         </div>
       </div>
+      <script>
+          plot()
+      </script>
 </body>
 </html>
