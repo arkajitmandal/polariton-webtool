@@ -1,14 +1,16 @@
 
 var myChart1, myChart2
-var X, Xmin, Xmax, XN
+var X, Xmin, Xmax, XN, Xf
 
 Xmin = -1.5
 Xmax =  1.5
 XN   = 50 + 2
 dX   = (Xmax - Xmin)/(XN-2 + 1)
 X = Array(XN)
+Xf = Array(XN)
 for (var i=0;i<XN;i++){
     X[i] = Xmin + dX * i
+    Xf[i] = parseInt(X[i] * 100)/100
 }
 
 
@@ -39,7 +41,7 @@ var plot = function(){
     myChart1 = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: X,
+            labels: Xf,
             datasets: [{
                 label: "",
                 borderColor: gradientStroke1,
@@ -97,7 +99,7 @@ var plot = function(){
                         fontColor: "rgba(0,0,0,0.5)",
                         fontStyle: "bold",
                         beginAtZero: true,
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 10,
                         padding: 20
                     },
                     gridLines: {
@@ -113,7 +115,7 @@ var plot = function(){
                     ticks: {
                         padding: 20,
                         fontColor: "rgba(0,0,0,0.5)",
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 10,
                         fontStyle: "bold"
                     }
                 }]
@@ -127,8 +129,8 @@ var plot = function(){
 var plot2 = function(){
     //var X =  [-1.5, -1.25, -1.0, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5]
     var Y1 = Eg(X)
-    var Y2 = Ep1(X)
-    var Y3 = Eg1(X)  
+    var Y2 = Ep2(X)
+    var Y3 = Ep1(X)  
     //[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
     document.getElementById("myChart2").height = 300;
@@ -149,7 +151,7 @@ var plot2 = function(){
     myChart2 = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: X,
+            labels: Xf,
             datasets: [{
                 label: "",
                 borderColor: gradientStroke1,
@@ -207,7 +209,7 @@ var plot2 = function(){
                         fontColor: "rgba(0,0,0,0.5)",
                         fontStyle: "bold",
                         beginAtZero: true,
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 10,
                         padding: 20
                     },
                     gridLines: {
@@ -223,7 +225,7 @@ var plot2 = function(){
                     ticks: {
                         padding: 20,
                         fontColor: "rgba(0,0,0,0.5)",
-                        maxTicksLimit: 5,
+                        maxTicksLimit: 10,
                         fontStyle: "bold"
                     }
                 }]
